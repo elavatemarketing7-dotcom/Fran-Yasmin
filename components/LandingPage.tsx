@@ -20,7 +20,10 @@ import {
   MessageCircle,
   CheckCircle2,
   Pause,
-  Star
+  Star,
+  Zap,
+  Clock,
+  ChevronDown
 } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
@@ -41,6 +44,10 @@ const LandingPage: React.FC = () => {
       setIsPlaying(!isPlaying);
     }
   };
+
+  // Mensagem específica para Promoção Relâmpago
+  const promoMessage = encodeURIComponent("Olá Dra. Franciany! Acabei de ver a PROMOÇÃO RELÂMPAGO próxima ao vídeo e quero garantir minha vaga com desconto agora mesmo!");
+  const promoWhatsappLink = `${WHATSAPP_LINK}&text=${promoMessage}`;
 
   return (
     <div className="bg-white">
@@ -82,24 +89,66 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* VIDEO HIGHLIGHT - IMMEDIATELY AFTER HERO, MAXIMIZED SIZE */}
-      <section className="px-6 py-20 bg-white border-b border-gray-50">
-        <div className="max-w-7xl mx-auto">
-           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-              {/* Video container expanded to 2/3 width for "original size" impact */}
-              <div className="w-full lg:w-2/3 relative aspect-video rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.2)] group cursor-pointer transition-transform duration-700 hover:shadow-[0_40px_120px_rgba(0,0,0,0.25)]">
+      {/* VIDEO HIGHLIGHT SECTION WITH INTEGRATED FLASH PROMO */}
+      <section className="px-6 py-24 bg-white border-b border-gray-50">
+        <div className="max-w-[1400px] mx-auto">
+          
+           {/* PROMOÇÃO RELÂMPAGO - INTEGRADA E PRÓXIMA AO VÍDEO */}
+           <div className="mb-4 w-full animate-fade-in-up">
+              <a 
+                href={promoWhatsappLink}
+                className="group relative flex flex-col md:flex-row items-center justify-between gap-6 p-8 md:p-10 rounded-[2.5rem] gold-gradient shadow-[0_30px_60px_rgba(212,175,55,0.2)] overflow-hidden transition-all hover:scale-[1.01] active:scale-95"
+              >
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="flex items-center gap-6 relative z-10">
+                  <div className="bg-black/10 p-4 rounded-2xl">
+                    <Zap className="w-8 h-8 text-black animate-pulse" />
+                  </div>
+                  <div>
+                    <h3 className="text-black font-black text-2xl md:text-3xl uppercase tracking-tighter leading-none mb-2">
+                      Promoção Relâmpago
+                    </h3>
+                    <p className="text-black/70 font-bold text-xs md:text-sm uppercase tracking-widest">
+                      Oportunidade exclusiva liberada no vídeo
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col items-center md:items-end gap-3 relative z-10">
+                   <div className="bg-black text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-[0.2em] shadow-2xl flex items-center gap-3 group-hover:bg-gray-900 transition-colors">
+                      RESGATAR NO WHATSAPP
+                      <ArrowRight className="w-5 h-5 text-[#d4af37]" />
+                   </div>
+                   <div className="flex items-center gap-2 text-black/40 text-[10px] font-bold uppercase tracking-widest">
+                      <Clock size={12} />
+                      Oferta expira em breve
+                   </div>
+                </div>
+              </a>
+           </div>
+
+           {/* SETAS INDICATIVAS PARA O VÍDEO */}
+           <div className="flex flex-col items-center justify-center mb-6 gap-1 animate-bounce opacity-80">
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#d4af37] mb-1">Assista para saber mais</span>
+              <ChevronDown className="w-5 h-5 text-[#d4af37]" />
+              <ChevronDown className="w-5 h-5 text-[#d4af37] -mt-3" />
+           </div>
+
+           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+              <div className="w-full lg:w-[65%] relative rounded-3xl overflow-hidden shadow-[0_40px_120px_rgba(0,0,0,0.18)] group cursor-pointer transition-all duration-700 bg-black">
                 <video 
                   ref={videoRef}
                   src={IMAGES.videoUrl} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto block"
                   playsInline
                   onClick={toggleVideo}
                   onPlay={() => setIsPlaying(true)}
                   onPause={() => setIsPlaying(false)}
                 />
+                
                 {!isPlaying && (
                   <div 
-                    className="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity group-hover:bg-black/50"
+                    className="absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity group-hover:bg-black/40"
                     onClick={toggleVideo}
                   >
                     <div className="w-24 h-24 bg-white/20 backdrop-blur-2xl rounded-full flex items-center justify-center border border-white/50 shadow-2xl transition-transform group-hover:scale-110">
@@ -116,7 +165,7 @@ const LandingPage: React.FC = () => {
                 )}
               </div>
               
-              <div className="w-full lg:w-1/3 text-left">
+              <div className="w-full lg:w-[35%] text-left">
                 <div className="inline-block px-5 py-2 rounded-full bg-[#d4af37]/10 text-[#d4af37] text-[11px] font-black uppercase tracking-[0.2em] mb-8">
                   Apresentação do Método
                 </div>
@@ -168,7 +217,7 @@ const LandingPage: React.FC = () => {
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-[#1a1a1a] font-black uppercase tracking-widest text-xs border-2 border-gray-200 px-6 py-4 rounded-xl hover:border-[#d4af37] transition-all"
             >
-              <Instagram className="w-5 h-5 text-[#d4af37]" />
+              <span className="p-1 rounded-full bg-[#d4af37]/10"><Instagram className="w-5 h-5 text-[#d4af37]" /></span>
               Conheça os Bastidores
             </a>
           </div>
@@ -198,10 +247,10 @@ const LandingPage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-          {IMAGES.results.map((url, i) => (
+          {IMAGES.testimonials.map((url, i) => (
             <div 
               key={i} 
-              className="relative aspect-square rounded-[2rem] overflow-hidden shadow-lg group cursor-pointer border border-gray-100"
+              className="relative aspect-square rounded-[2rem] overflow-hidden shadow-xl group cursor-pointer border border-gray-100"
               onClick={() => openLightbox(url)}
             >
               <img src={url} alt={`Resultado ${i+1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -211,9 +260,6 @@ const LandingPage: React.FC = () => {
             </div>
           ))}
         </div>
-        <p className="mt-10 text-center text-gray-300 text-[10px] uppercase tracking-widest font-bold">
-          As imagens são ilustrativas. Os resultados podem variar conforme cada organismo.
-        </p>
       </section>
 
       {/* 4. POR QUE CONFIAR */}
@@ -276,34 +322,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* TESTIMONIALS SECTION - AREA DE COMENTARIOS */}
-      <section className="px-6 py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto text-center mb-16">
-          <div className="flex justify-center gap-1 mb-4">
-            {[1,2,3,4,5].map(s => <Star key={s} size={20} className="text-[#d4af37] fill-[#d4af37]" />)}
-          </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">O que dizem as pacientes</h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto font-medium">A satisfação de quem viveu a experiência e o método exclusivo Franciany Yasmin.</p>
-        </div>
-
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6 max-w-7xl mx-auto">
-          {IMAGES.testimonials.map((url, i) => (
-            <div 
-              key={i} 
-              className="relative break-inside-avoid rounded-3xl overflow-hidden shadow-xl border border-white hover:scale-[1.02] transition-transform cursor-pointer group"
-              onClick={() => openLightbox(url)}
-            >
-              <img src={url} alt={`Comentário ${i+1}`} className="w-full h-auto block" />
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                 <div className="bg-white/20 backdrop-blur-md p-3 rounded-full">
-                    <Maximize2 className="w-6 h-6 text-white" />
-                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* 7. MAIS PROVAS - BASTIDORES */}
       <section className="px-6 py-24 bg-white">
         <div className="max-w-6xl mx-auto mb-16 flex justify-between items-end">
@@ -318,7 +336,6 @@ const LandingPage: React.FC = () => {
               <img src={url} alt={`Ambiente ${i+1}`} className="w-full h-full object-cover transition-transform hover:scale-105" />
             </div>
           ))}
-          {/* PLACEHOLDER FOR MORE LINKS */}
           <div className="min-w-[300px] flex items-center justify-center border-4 border-dashed border-gray-200 rounded-[3rem]">
              <span className="text-gray-300 font-bold uppercase tracking-widest text-xs">Mais em breve</span>
           </div>
