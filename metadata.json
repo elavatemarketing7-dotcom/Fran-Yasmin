@@ -1,0 +1,8 @@
+{
+  "name": "Franciany Yasmin - Estética Premium",
+  "description": "Landing page mobile-first de alta conversão para tratamentos estéticos premium, focada na autoridade da expert Dra. Franciany Yasmin.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
