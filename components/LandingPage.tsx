@@ -82,11 +82,12 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* VIDEO HIGHLIGHT - IMMEDIATELY AFTER HERO, HIGHLY PROMINENT */}
+      {/* VIDEO HIGHLIGHT - IMMEDIATELY AFTER HERO, MAXIMIZED SIZE */}
       <section className="px-6 py-20 bg-white border-b border-gray-50">
-        <div className="max-w-6xl mx-auto">
-           <div className="flex flex-col lg:flex-row items-center gap-12">
-              <div className="w-full lg:w-3/5 relative aspect-video rounded-[3rem] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] group cursor-pointer border-8 border-white">
+        <div className="max-w-7xl mx-auto">
+           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+              {/* Video container expanded to 2/3 width for "original size" impact */}
+              <div className="w-full lg:w-2/3 relative aspect-video rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.2)] group cursor-pointer transition-transform duration-700 hover:shadow-[0_40px_120px_rgba(0,0,0,0.25)]">
                 <video 
                   ref={videoRef}
                   src={IMAGES.videoUrl} 
@@ -107,24 +108,28 @@ const LandingPage: React.FC = () => {
                   </div>
                 )}
                 {isPlaying && (
-                  <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="bg-white/20 backdrop-blur-xl p-3 rounded-full border border-white/30" onClick={toggleVideo}>
+                  <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="bg-white/20 backdrop-blur-xl p-4 rounded-full border border-white/30" onClick={toggleVideo}>
                       <Pause className="w-6 h-6 text-white fill-white" />
                     </div>
                   </div>
                 )}
               </div>
-              <div className="w-full lg:w-2/5 text-left">
-                <div className="inline-block px-4 py-1 rounded-full bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-black uppercase tracking-widest mb-6">
+              
+              <div className="w-full lg:w-1/3 text-left">
+                <div className="inline-block px-5 py-2 rounded-full bg-[#d4af37]/10 text-[#d4af37] text-[11px] font-black uppercase tracking-[0.2em] mb-8">
                   Apresentação do Método
                 </div>
-                <h2 className="font-serif text-3xl md:text-4xl text-[#1a1a1a] mb-8 leading-tight font-bold italic">Sinta a Diferença de ser Cuidada</h2>
-                <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-10 border-l-4 border-[#d4af37] pl-6 py-2">
+                <h2 className="font-serif text-3xl md:text-5xl text-[#1a1a1a] mb-8 leading-tight font-bold italic">Sinta a Diferença de ser Cuidada</h2>
+                <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-12 border-l-4 border-[#d4af37] pl-8 py-3 bg-gray-50/50 rounded-r-2xl">
                   descubra como a beleza pode ser realçada com técnica, sensibilidade e propósito.
                   resultado naturais e transformadores. Aperte o play e sinta a diferença de ser cuidada por quem entende que sua beleza é única, e merece atenção especial.
                 </p>
-                <div className="flex items-center gap-6">
-                   <span className="font-signature text-5xl text-[#d4af37] -rotate-3">Dra. Frany</span>
+                <div className="flex items-center gap-8">
+                   <div className="flex flex-col">
+                      <span className="font-signature text-6xl text-[#d4af37] -rotate-3 mb-1">Dra. Frany</span>
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-2">Estética com Alma</span>
+                   </div>
                    <div className="flex-1 h-px bg-gradient-to-r from-gray-200 to-transparent"></div>
                 </div>
               </div>
