@@ -1,16 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import { AppState } from './types';
-import LandingPage from './components/LandingPage';
-import Quiz from './components/Quiz';
-import ResultPage from './components/ResultPage';
-import Intro from './components/Intro';
+import { AppState } from './types.ts';
+import LandingPage from './components/LandingPage.tsx';
+import Quiz from './components/Quiz.tsx';
+import ResultPage from './components/ResultPage.tsx';
+import Intro from './components/Intro.tsx';
 
 const App: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<AppState>(AppState.INTRO);
   const [quizAnswers, setQuizAnswers] = useState<string[]>([]);
 
-  // Scroll to top when changing steps
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentStep]);
@@ -21,7 +20,6 @@ const App: React.FC = () => {
   const handleQuizComplete = (answers: string[]) => {
     setQuizAnswers(answers);
     setCurrentStep(AppState.ANALYZING);
-    // Simulate analyzing time
     setTimeout(() => {
       setCurrentStep(AppState.RESULT);
     }, 2500);
@@ -29,12 +27,10 @@ const App: React.FC = () => {
 
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Intro Selection */}
       {currentStep === AppState.INTRO && (
         <Intro onStartQuiz={handleStartQuiz} onGoToSite={handleGoToSite} />
       )}
 
-      {/* Quiz Overlay / Flow */}
       {(currentStep === AppState.QUIZ || currentStep === AppState.ANALYZING) && (
         <Quiz 
           onComplete={handleQuizComplete} 
@@ -43,7 +39,6 @@ const App: React.FC = () => {
         />
       )}
 
-      {/* Result Page */}
       {currentStep === AppState.RESULT && (
         <ResultPage 
           answers={quizAnswers} 
@@ -51,7 +46,6 @@ const App: React.FC = () => {
         />
       )}
 
-      {/* Main Site */}
       {currentStep === AppState.SITE && (
         <LandingPage />
       )}
